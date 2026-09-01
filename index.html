@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="I wrote down seven ways my payment-recovery agent could fail before I ran it. None of them fired. The first one is still the worst news in the project.">
+<meta name="author" content="Sri Ram Varun Dittakavi">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="A dumber agent beat mine by sixteen points">
+<meta property="og:description" content="I wrote down seven ways my payment-recovery agent could fail before I ran it. None of them fired. The first one is still the worst news in the project.">
+<meta property="og:url" content="https://sriramvarun0636.github.io/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A dumber agent beat mine by sixteen points">
+<meta name="twitter:description" content="I wrote down seven ways my payment-recovery agent could fail before I ran it. None of them fired. The first one is still the worst news in the project.">
+
+<link rel="canonical" href="https://sriramvarun0636.github.io/">
+<title>Sixteen Points Behind</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  :root {
+    --paper:   #f2f4f3;
+    --raised:  #e9ecea;
+    --ink:     #14181c;
+    --muted:   #5a6470;
+    --rule:    #d6dbd9;
+    --adverse: #9e2b25;
+
+    --display: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+    --measure: 63ch;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:   #12151a;
+      --raised:  #1a1f26;
+      --ink:     #e4e7ea;
+      --muted:   #8b95a1;
+      --rule:    #262c34;
+      --adverse: #e0776b;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:   #12151a;
+    --raised:  #1a1f26;
+    --ink:     #e4e7ea;
+    --muted:   #8b95a1;
+    --rule:    #262c34;
+    --adverse: #e0776b;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--display);
+    font-optical-sizing: auto;
+    font-size: 19px;
+    line-height: 1.72;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0 24px 96px;
+  }
+
+  .wrap {
+    max-width: var(--measure);
+    margin: 0 auto;
+  }
+
+  /* ---- masthead ---------------------------------------------------- */
+
+  header {
+    padding: 84px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-variation-settings: "opsz" 72;
+    font-size: clamp(38px, 7.2vw, 61px);
+    font-weight: 500;
+    line-height: 1.04;
+    letter-spacing: -0.021em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .deck {
+    font-size: 21px;
+    line-height: 1.58;
+    font-weight: 300;
+    color: var(--muted);
+    text-wrap: pretty;
+    margin: 0;
+    max-width: 54ch;
+  }
+
+  .byline {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+    padding-top: 12px;
+    border-top: 1px solid var(--rule);
+    margin: 10px 0 0;
+  }
+
+  /* ---- article ----------------------------------------------------- */
+
+  article {
+    padding-top: 52px;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+
+  article p { margin: 0; text-wrap: pretty; }
+
+  article p.lede {
+    font-size: 21px;
+    line-height: 1.62;
+  }
+
+  em { font-style: italic; }
+
+  strong {
+    font-weight: 600;
+  }
+
+  .fig {
+    font-family: var(--mono);
+    font-size: 0.88em;
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .adverse { color: var(--adverse); }
+
+  /* ---- register block ---------------------------------------------- */
+
+  .register {
+    font-family: var(--mono);
+    font-size: 13.5px;
+    line-height: 1.62;
+    font-variant-numeric: tabular-nums;
+    border-top: 2px solid var(--adverse);
+    border-bottom: 1px solid var(--rule);
+    padding: 16px 0 18px;
+    margin: 12px 0;
+    display: grid;
+    gap: 11px;
+    overflow-x: auto;
+  }
+
+  .register .label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .register .statement {
+    font-family: var(--display);
+    font-size: 18px;
+    line-height: 1.5;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .register dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 6px 20px;
+    margin: 0;
+  }
+
+  .register dt {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 3px;
+  }
+
+  .register dd { margin: 0; }
+
+  /* ---- pull quote --------------------------------------------------- */
+
+  .pull {
+    font-size: clamp(23px, 4.4vw, 29px);
+    line-height: 1.3;
+    font-weight: 400;
+    letter-spacing: -0.014em;
+    text-wrap: balance;
+    padding: 6px 0 6px 26px;
+    border-left: 2px solid var(--adverse);
+    margin: 14px 0;
+  }
+
+  /* ---- footer ------------------------------------------------------- */
+
+  footer {
+    margin-top: 60px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--muted);
+    display: grid;
+    gap: 4px;
+  }
+
+  footer .colophon {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    max-width: 58ch;
+  }
+
+  a {
+    color: var(--ink);
+    text-decoration-color: var(--adverse);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+
+  a:hover { color: var(--adverse); }
+
+  a:focus-visible {
+    outline: 2px solid var(--adverse);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
+  @media (max-width: 640px) {
+    body { font-size: 18px; padding: 0 20px 72px; }
+    header { padding-top: 56px; }
+    .deck { font-size: 19px; }
+    article p.lede { font-size: 19px; }
+    .register dl { grid-template-columns: 1fr; gap: 2px; }
+    .register dt { padding-top: 9px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Pre-registered evaluation</p>
+    <h1>A dumber agent beat mine by sixteen points</h1>
+    <p class="deck">I wrote down seven ways my payment-recovery agent could fail before I ran it. None of them fired. The first one is still the worst news in the project.</p>
+    <p class="byline">Sri Ram Varun Dittakavi &nbsp;·&nbsp; ~6 min read</p>
+  </header>
+
+  <article>
+
+    <p class="lede">I spent six weeks building an agent that recovers failed payments, and before I pointed it at anything I wrote seven ways it could fail into a file, with thresholds, and dated it.</p>
+
+    <p>Then I ran it. Nine variants, a thousand seeded universes, five hundred customers each. The naive baseline — retry everything, then text the customer a payment link — recovered <span class="fig">65.4%</span> of failed payments. Mine recovered <span class="fig">49.1%</span>.</p>
+
+    <div class="register">
+      <div class="label">Criterion F1 · registered before the first run</div>
+      <div class="statement">The taxonomy adds nothing over a naive baseline.</div>
+      <dl>
+        <dt>Fires if</dt>
+        <dd>the paired interval includes zero</dd>
+        <dt>Result</dt>
+        <dd class="adverse">did not fire — &minus;16.35pp, interval [&minus;16.54, &minus;16.17], excludes zero on the baseline's side</dd>
+      </dl>
+    </div>
+
+    <p>Strictly, it didn't fire. I'd written it to trip when the interval <em>included</em> zero — when I couldn't tell my agent apart from the dumb one. Mine excluded zero comfortably. On the wrong side. I had carefully specified the failure where my work turns out to be indistinguishable from nothing, and not the one where it is decisively worse. That's its own lesson about writing criteria.</p>
+
+    <p>That number went in the second paragraph of my README and the first thirty seconds of my demo video. Here is why.</p>
+
+    <p>Start with what the baseline does to earn those sixteen points. Across those thousand universes it took <strong>20,988 automated actions on payments a fraud engine had declined.</strong> It sent 66,040 retries on a failure class where the correct number of attempts is zero.</p>
+
+    <p>Sit with the first number. A payment is declined for suspected fraud. Maybe the card is stolen. Maybe it's yours and the person holding it isn't you. The baseline's response is to send the cardholder an automated message: <em>your payment failed, click here to complete it.</em></p>
+
+    <p>If that customer is a victim, you have just sent them a link, in the voice of a brand they trust, about a transaction they never made. That isn't adjacent to the phishing pattern. It <em>is</em> the phishing pattern, executed by the merchant, at scale, automatically.</p>
+
+    <p>I check this with a predicate that scans the ledger rather than asking the agent how it did — eight claims, all read out of receipts. It holds for my agent on <span class="fig">1,000 of 1,000</span> seeds. It holds for the baseline on <span class="fig">0 of 1,000</span>.</p>
+
+    <p>So the baseline is not a better agent that happens to score higher. It is an agent that <strong>cannot be deployed</strong>, scoring higher <em>because of</em> the actions that make it undeployable.</p>
+
+    <p>None of which a single reported number can express. Had I built the baseline and posted "65% recovery," every word would be true, and no reader could tell what it cost.</p>
+
+    <p>Now look at what produces a number like that: a search that rewards whatever scores highest, run by someone who never wrote down in advance what would count as failing. What scored highest was the illegal thing. That isn't a coincidence, and it isn't really a story about safety. It's a story about <em>when you decided what counts.</em></p>
+
+    <p>Almost no agent demo I've seen was evaluated against criteria fixed before the run. I don't think that's fraud. I think it's what the process does to you by default. You run something. It disappoints. You adjust a threshold, change the population, extend the horizon, run it again. Eventually a run looks good, and that's the run in the post. Nobody lied at any point — but the number you're reading is a maximum over a search whose length goes unreported. And it isn't only the reader who can't see that. You can't either, not reliably, not about your own work.</p>
+
+    <p>Pre-registration fixes it, and it's embarrassingly cheap. It's a file. Dated, append-only, thresholds written down with a rule for what each one means. Mine carries thirty-six amendments, each flagged with whether I made the change with the relevant output already visible — because <em>I amended the protocol</em> and <em>I amended the protocol after seeing the numbers</em> are different sentences, and only one of them is a confession.</p>
+
+    <p>What it costs isn't technical. It costs you the option to quietly not mention the run that went badly. That is the entire price, and it's why almost nobody pays it.</p>
+
+    <p>Before this gets too pleased with itself: the outcomes are modelled. I'm a student, and no student has live merchant traffic. Nine parameters govern whether an intervention succeeds; eight are my judgement, tagged <span class="fig">[guess]</span> in the source, where a parameter with no provenance tag fails a test. The ninth isn't a measurement either: it's the registered zero for retrying a dead instrument, a structural fact rather than an estimate. No one publishes those rates at this granularity, and inventing a citation would have been the first dishonest sentence in the repository.</p>
+
+    <p>So the claim isn't "₹116 crore was recovered." It's that under a stated outcome model, swept ±50% on every parameter across 83 configurations, this policy beats the control by a stated margin and the direction survives all of them. The methodology is the deliverable. Point it at real traffic and it gives you a real number.</p>
+
+    <p>Here is where all of that stopped being theoretical.</p>
+
+    <p>Every test passed. <span class="fig">1,353</span> of them. The safety predicate was clean across a thousand seeds. No guard misbehaved. No receipt was missing. No exception was raised.</p>
+
+    <p>And a third of my population was doing nothing at all.</p>
+
+    <p>The system has a guard for India's e-mandate rules: you cannot debit a customer's standing mandate without serving twenty-four hours' notice first. When it sees a mandate debit with no notice on file, it defers the debit and hands back an obligation — <em>send the notice.</em></p>
+
+    <p>Obligations were honoured on the execute path. And a deferred proposal never executes. So no notice was built. So the timestamp stayed empty. So the guard deferred again, and again, five times, and then blocked the debit for good.</p>
+
+    <p class="pull">The one thing that could satisfy the guard was an execution the guard was blocking.</p>
+
+    <p>I didn't find it with a test. I found it writing an adversarial attack against the mandate flow, which came back passing — and then noticing it could never have failed, because the thing it attacked had never happened. Of <span class="fig">707</span> retries executed on one seed, <span class="fig">zero</span> landed on any of the <span class="fig">275</span> mandate episodes. Two hundred and nine of those episodes ended blocked. That was the third: thirty-one percent of my population had a retry ladder that never fired once.</p>
+
+    <p>Fixing it moved my headline recovery rate from <span class="fig">0.344</span> to <span class="fig">0.491</span>.</p>
+
+    <p>Which means three quarters of what I had been calling <em>the price of compliance</em> was my own deadlock. I'd been telling a tidy story about what it costs to do this properly, and most of that cost was a bug I wrote.</p>
+
+    <div class="register">
+      <div class="label">Criterion F5 · registered before the first run</div>
+      <div class="statement">Compliance is unaffordable — the ungated agent beats the gated one by more than twenty points.</div>
+      <dl>
+        <dt>Before</dt>
+        <dd class="adverse">19.378 &nbsp;— six tenths of a point from firing</dd>
+        <dt>After</dt>
+        <dd>4.742</dd>
+      </dl>
+    </div>
+
+    <p>Had it fired, I would have published a conclusion about regulation that was actually a conclusion about me.</p>
+
+    <p>Every test I had written asked whether the agent did something <em>wrong</em>. Not one asked whether it did anything <em>at all</em>.</p>
+
+    <p>I don't think that gap is mine alone. Safety tests get written as <em>this must not happen</em>, and a system that does nothing passes every one of them, perfectly, forever. A guard that defers indefinitely is indistinguishable from a guard that works. Liveness needs its own assertions, and they feel redundant right up until they aren't.</p>
+
+    <p>About those sixteen points: I sat on them for a day. Not deciding whether to publish — I'd written down in advance that I would, which is the only thing writing it down is for. I was deciding how to phrase it so it stung less. Every draft had a softener in it. <em>While the baseline scores higher on raw recovery…</em> <em>The comparison is arguably unfair, since…</em> Both true. Both also the sound of someone negotiating with a number.</p>
+
+    <p>The version I shipped states it flat, in the second paragraph, before I've earned any goodwill from the reader. It's the worse-reading version. It's the only one I'd defend.</p>
+
+    <p>I run twenty-two adversarial attacks against this thing. Nineteen survive. Three are open, named in the repo, each with the conditions under which it wins.</p>
+
+    <p>The claim was never that the agent is correct. It's that <strong>being wrong is discoverable</strong> — and the evidence for that isn't the nineteen. It's how much of that list the apparatus found instead of me.</p>
+
+    <p>So write down what would make you abandon the thing you're building, before you build it, with a number attached. You probably won't fail the way you predicted. I didn't: I specified the wrong failure, and the one that actually mattered got caught by a test I'd written for something else. That is still the apparatus working. What never works is deciding afterwards.</p>
+
+  </article>
+
+  <footer>
+    <div>The agent, the harness and the pre-registered protocol:</div>
+    <div><a href="https://github.com/sriramvarun0636/Vasool">github.com/sriramvarun0636/Vasool</a></div>
+    <div class="colophon">Final-year B.Tech CS undergraduate in India. Looking for work on agent evaluation, payments infrastructure, or anywhere correctness has to be demonstrated rather than asserted.<br><a href="mailto:sriramvarun636@gmail.com">sriramvarun636@gmail.com</a> &nbsp;·&nbsp; <a href="https://github.com/sriramvarun0636">github.com/sriramvarun0636</a></div>
+  </footer>
+
+</div>
+</body>
+</html>
