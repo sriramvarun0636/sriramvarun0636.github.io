@@ -33,7 +33,7 @@
     --display: 'Newsreader', Georgia, 'Times New Roman', serif;
     --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
-    --measure: 63ch;
+    --measure: 660px;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -98,7 +98,7 @@
   h1 {
     font-family: var(--display);
     font-variation-settings: "opsz" 72;
-    font-size: clamp(38px, 7.2vw, 61px);
+    font-size: clamp(36px, 6.4vw, 53px);
     font-weight: 500;
     line-height: 1.04;
     letter-spacing: -0.021em;
@@ -113,7 +113,7 @@
     color: var(--muted);
     text-wrap: pretty;
     margin: 0;
-    max-width: 54ch;
+    max-width: 30em;
   }
 
   .byline {
@@ -132,7 +132,7 @@
     padding-top: 52px;
     display: flex;
     flex-direction: column;
-    gap: 26px;
+    gap: 29px;
   }
 
   article p { margin: 0; text-wrap: pretty; }
@@ -279,7 +279,7 @@
 
   <article>
 
-    <p class="lede">I spent six weeks building an agent that recovers failed payments, and before I pointed it at anything I wrote seven ways it could fail into a file, with thresholds, and dated it.</p>
+    <p class="lede">I built an agent that recovers failed payments, and before I pointed it at anything I wrote seven ways it could fail into a file, with thresholds, and dated it.</p>
 
     <p>Then I ran it. Nine variants, a thousand seeded universes, five hundred customers each. The naive baseline — retry everything, then text the customer a payment link — recovered <span class="fig">65.4%</span> of failed payments. Mine recovered <span class="fig">49.1%</span>.</p>
 
