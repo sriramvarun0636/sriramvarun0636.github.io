@@ -336,7 +336,7 @@
 
     <p>Every test passed. <span class="fig">1,353</span> of them. The safety predicate was clean across a thousand seeds. No guard misbehaved. No receipt was missing. No exception was raised.</p>
 
-    <p>And most of my population was doing nothing at all.</p>
+    <p>And a third of my population was doing nothing at all.</p>
 
     <p>The system has a guard for India's e-mandate rules: you cannot debit a customer's standing mandate without serving twenty-four hours' notice first. When it sees a mandate debit with no notice on file, it defers the debit and hands back an obligation — <em>send the notice.</em></p>
 
@@ -344,7 +344,7 @@
 
     <p class="pull">The one thing that could satisfy the guard was an execution the guard was blocking.</p>
 
-    <p>I didn't find it with a test. I found it writing an adversarial attack against the mandate flow, which came back passing — and then noticing it could never have failed, because the thing it attacked had never happened. Of <span class="fig">707</span> retries executed on one seed, <span class="fig">zero</span> landed on any of the <span class="fig">275</span> mandate episodes. Two hundred and nine of those episodes ended blocked. Every one of the 275 had a retry ladder that never fired once.</p>
+    <p>I didn't find it with a test. I found it writing an adversarial attack against the mandate flow, which came back passing — and then noticing it could never have failed, because the thing it attacked had never happened. Of <span class="fig">707</span> retries executed on one seed, <span class="fig">zero</span> landed on any of the <span class="fig">275</span> mandate episodes. Two hundred and nine of those episodes ended blocked. That was the third: thirty-one percent of my population had a retry ladder that never fired once.</p>
 
     <p>Fixing it moved my headline recovery rate from <span class="fig">0.344</span> to <span class="fig">0.491</span>.</p>
 
