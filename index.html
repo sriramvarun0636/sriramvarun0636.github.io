@@ -4,23 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="I wrote down seven ways my payment-recovery agent could fail before I ran it. None of them fired. The first one is still the worst news in the project, and the last one found a limit on my best claim.">
+<meta name="description" content="I wrote down seven ways my payment-recovery agent could fail before I ran it. For a month none of them fired. Then the last one did, and the rule I had written for that case turns the result into an instrument.">
 <meta name="author" content="Sri Ram Varun Dittakavi">
 
 <meta property="og:type" content="article">
-<meta property="og:title" content="A dumber agent beat mine by eighteen points">
-<meta property="og:description" content="I wrote down seven ways my payment-recovery agent could fail before I ran it. None of them fired. The first one is still the worst news in the project, and the last one found a limit on my best claim.">
+<meta property="og:title" content="A dumber agent beat mine by twenty-two points">
+<meta property="og:description" content="I wrote down seven ways my payment-recovery agent could fail before I ran it. For a month none of them fired. Then the last one did, and the rule I had written for that case turns the result into an instrument.">
 <meta property="og:url" content="https://sriramvarun0636.github.io/">
 <meta property="og:image" content="https://sriramvarun0636.github.io/Vasool/assets/dashboard.png">
 <meta property="og:image:alt" content="The Vasool dashboard: nine exhibits rendered from the evaluation manifest.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="A dumber agent beat mine by eighteen points">
-<meta name="twitter:description" content="I wrote down seven ways my payment-recovery agent could fail before I ran it. None of them fired. The first one is still the worst news in the project, and the last one found a limit on my best claim.">
+<meta name="twitter:title" content="A dumber agent beat mine by twenty-two points">
+<meta name="twitter:description" content="I wrote down seven ways my payment-recovery agent could fail before I ran it. For a month none of them fired. Then the last one did, and the rule I had written for that case turns the result into an instrument.">
 <meta name="twitter:image" content="https://sriramvarun0636.github.io/Vasool/assets/dashboard.png">
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><text x=%2232%22 y=%2246%22 font-size=%2252%22 font-family=%22Georgia,serif%22 fill=%22%239e2b25%22 text-anchor=%22middle%22>§</text></svg>">
 <link rel="canonical" href="https://sriramvarun0636.github.io/">
-<title>Eighteen Points Behind</title>
+<title>Twenty-Two Points Behind</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -278,16 +278,16 @@
 
   <header>
     <p class="eyebrow">Pre-registered evaluation</p>
-    <h1>A dumber agent beat mine by eighteen points</h1>
-    <p class="deck">I wrote down seven ways my payment-recovery agent could fail before I ran it. None of them fired. The first one is still the worst news in the project &mdash; and the last one, evaluated three weeks later, found a limit on my best claim.</p>
-    <p class="byline">Sri Ram Varun Dittakavi &nbsp;·&nbsp; ~8 min read</p>
+    <h1>A dumber agent beat mine by twenty-two points</h1>
+    <p class="deck">I wrote down seven ways my payment-recovery agent could fail before I ran it. For a month, none of them fired. The first one is still the worst news in the project &mdash; and the last one, when it finally fired, turned the whole thing from a result into an instrument, by a rule I had written before the first run.</p>
+    <p class="byline">Sri Ram Varun Dittakavi &nbsp;·&nbsp; ~10 min read</p>
   </header>
 
   <article>
 
     <p class="lede">I built an agent that recovers failed payments, and before I pointed it at anything I wrote seven ways it could fail into a file, with thresholds, and dated it.</p>
 
-    <p>Then I ran it. Nine variants, a thousand seeded universes, five hundred customers each. The incumbent baseline — retry everything, then text the customer a payment link — recovered <span class="fig">64.8%</span> of failed payments. Mine recovered <span class="fig">46.6%</span>.</p>
+    <p>Then I ran it. Nine variants, a thousand seeded universes, five hundred customers each. The incumbent baseline — retry everything, then text the customer a payment link — recovered <span class="fig">64.8%</span> of failed payments. Mine recovered <span class="fig">43.0%</span>.</p>
 
     <div class="register">
       <div class="label">Criterion F1 · registered before the first run</div>
@@ -304,7 +304,7 @@
 
     <p>That number went in the second paragraph of my README and the first thirty seconds of my demo video. Here is why.</p>
 
-    <p>Start with what the baseline does to earn those eighteen points. Across those thousand universes it took <strong>18,803 automated actions on payments a fraud engine had declined.</strong> It sent 60,972 retries on a failure class where the correct number of attempts is zero.</p>
+    <p>Start with what the baseline does to earn those twenty-two points. Across those thousand universes it took <strong>18,803 automated actions on payments a fraud engine had declined.</strong> It sent 60,972 retries on a failure class where the correct number of attempts is zero.</p>
 
     <p>Sit with the first number. A payment is declined for suspected fraud. Maybe the card is stolen. Maybe it's yours and the person holding it isn't you. The baseline's response is to send the cardholder an automated message: <em>your payment failed, click here to complete it.</em></p>
 
@@ -314,9 +314,9 @@
 
     <p>So the baseline is not a better agent that happens to score higher. It is an agent that <strong>cannot be deployed</strong>, scoring higher <em>because of</em> the actions that make it undeployable.</p>
 
-    <p>Which invites the fair question: how does it do against something that <em>isn't</em> breaking the law? Against an ablation with my guards intact and the taxonomy stripped out, I win by <span class="fig">4.15 points</span>, interval [+4.00, +4.29]. Against a retry-only baseline that never contacts anyone, by <span class="fig">0.90</span>. Every arm that beats me breaks the law to do it. Every arm that obeys it, I beat. That is a narrower claim than "my agent recovers more money," and it is the one the data supports. Hold on to that second number, though. It is small, and a sweep I ran later told me exactly how small.</p>
+    <p>Which invites the fair question: how does it do against something that <em>isn't</em> breaking the law? Against an ablation with my guards intact and the taxonomy stripped out, I win by <span class="fig">1.00 point</span>, interval [+0.85, +1.14]. Against a retry-only baseline that never contacts anyone, I used to win by <span class="fig">0.90</span>; I now lose by <span class="fig">2.74</span>, for a reason I'll come to. Every arm that beats me breaks a rule to get there &mdash; the retry-only one included, which acts on 16,631 payments a fraud engine declined, where mine acts on none. Every arm that obeys the rules, I beat or match. That is a narrower claim than "my agent recovers more money," and it is the one the data supports. Hold on to that retry-only number, though. It has already told me two things.</p>
 
-    <p>The eighteen points are not all compliance either, though it would flatter me to say so. Run my own policy with the guard chain removed and everything else held fixed, and it recovers <span class="fig">53.7%</span> &mdash; so the guards themselves cost <span class="fig">7.07 points</span>. The remaining eleven belong to a policy that contacts more people, more often, which is a different thing from obeying the rules. I conflated the two for a while, because the bigger number made a better story about regulation.</p>
+    <p>The twenty-two points are not all compliance either, though it would flatter me to say so. Run my own policy with the guard chain removed and everything else held fixed, and it recovers <span class="fig">49.8%</span> &mdash; so the guards themselves cost <span class="fig">6.77 points</span>. The remaining fifteen belong to a policy that contacts more people, more often, which is a different thing from obeying the rules. I conflated the two for a while, because the bigger number made a better story about regulation.</p>
 
     <p>None of which a single reported number can express. Had I built the baseline and posted "65% recovery," every word would be true, and no reader could tell what it cost.</p>
 
@@ -324,31 +324,41 @@
 
     <p>Almost no agent demo I've seen was evaluated against criteria fixed before the run. I don't think that's fraud. I think it's what the process does to you by default. You run something. It disappoints. You adjust a threshold, change the population, extend the horizon, run it again. Eventually a run looks good, and that's the run in the post. Nobody lied at any point — but the number you're reading is a maximum over a search whose length goes unreported. And it isn't only the reader who can't see that. You can't either, not reliably, not about your own work.</p>
 
-    <p>Pre-registration fixes it, and it's embarrassingly cheap. It's a file. Dated, append-only, thresholds written down with a rule for what each one means. Mine carries sixty-two amendments, each flagged with whether I made the change with the relevant output already visible — because <em>I amended the protocol</em> and <em>I amended the protocol after seeing the numbers</em> are different sentences, and only one of them is a confession.</p>
+    <p>Pre-registration fixes it, and it's embarrassingly cheap. It's a file. Dated, append-only, thresholds written down with a rule for what each one means. Mine carries sixty-six amendments, each flagged with whether I made the change with the relevant output already visible — because <em>I amended the protocol</em> and <em>I amended the protocol after seeing the numbers</em> are different sentences, and only one of them is a confession.</p>
 
     <p>What it costs isn't technical. It costs you the option to quietly not mention the run that went badly. That is the entire price, and it's why almost nobody pays it.</p>
 
     <p>Before this gets too pleased with itself: the outcomes are modelled. I'm a student, and no student has live merchant traffic. Eleven parameters govern whether an intervention succeeds; ten are my judgement, tagged <span class="fig">[guess]</span> in the source, where a parameter with no provenance tag fails a test. The eleventh isn't a measurement either: it's the registered zero for retrying a dead instrument, a structural fact rather than an estimate. No one publishes those rates at this granularity, and inventing a citation would have been the first dishonest sentence in the repository.</p>
 
-    <p>So the claim isn't "₹111 crore was recovered." It's that under a stated outcome model, this policy beats the control by a stated margin. The methodology is the deliverable. Point it at real traffic and it gives you a real number.</p>
+    <p>So the claim was never "₹41 crore was recovered." It was that under a stated outcome model, this policy compares to its controls by stated margins &mdash; and, as you'll see, even that claim did not survive its own test. The methodology is the deliverable. Point it at real traffic and it gives you a real number.</p>
 
     <p>When I wrote that sentence the first time, it ended differently. It said the direction survives a ±50% sweep of every parameter. I had registered that sweep and not run it — it costs about a hundred times the main run — so what I was really reporting was an intention. Nobody would have caught it. The criterion that covers it, F6, read <em>not evaluated</em> in every manifest I published, which is honest and also empty: a criterion that has never been evaluated has never risked anything.</p>
 
     <p>So I ran it. <span class="fig">185,400</span> runs, just under eight hours: every guessed parameter moved to &minus;50%, &minus;25%, +25% and +50% of its registered value, one at a time, plus six shifts of the two failure-reason mixes — <span class="fig">102</span> configurations, nine variants, two hundred seeded universes each.</p>
 
-    <p>The headline survives all of it. So does the price of the guards, and the two ablations with the largest effects. Under every single move of every single guess, the incumbent still beats me by about eighteen points and the guard chain still costs about seven. Those are properties of the agent.</p>
+    <p>The first time, the headline survived all of it. So did the price of the guards, and the two ablations with the largest effects. Under every single move of every single guess, the incumbent still beat me by about eighteen points and the guard chain still cost about seven. Those are properties of the agent.</p>
 
-    <p>Two claims are not. The one-point lead over the retry-only baseline — the number I told you to hold on to — <strong>fails to survive 24 of the 102 configurations</strong>, under fourteen different parameters. And my flagship claim, the one the whole taxonomy is built around, fails to survive two.</p>
+    <p>Two claims were not. The one-point lead over the retry-only baseline — the number I told you to hold on to — <strong>failed to survive 24 of the 102 configurations</strong>, under fourteen different parameters. And my flagship claim, the one the whole taxonomy is built around, failed to survive two.</p>
 
     <p class="pull">A lead that small is a property of the world I built, not of the agent in it.</p>
 
     <p>The flagship claim is that retrying a dead card is worse than useless: it burns one of the four attempts the gateway allows before it cancels the subscription, and that attempt is the one a re-authorisation link needed. Measuring it means comparing my agent against a copy of itself that gives dead instruments one retry. For months that difference was indistinguishable from zero, because expired cards are five percent of the population. It only became measurable when I added UPI mandates, where a third of failures are an instrument that cannot be debited as it stands.</p>
 
-    <p>Which is exactly what the sweep found. Halve the share of customers on mandates, or shift the mandate failure mix toward reasons that are recoverable, and the effect stops excluding zero. The claim holds in the world I registered. It does not hold in a world with half as many mandates, and I would not have known that without spending the eight hours.</p>
+    <p>Which is exactly what that sweep found. Halve the share of customers on mandates, or shift the mandate failure mix toward reasons that are recoverable, and the effect stops excluding zero. The claim holds in the world I registered. It does not hold in a world with half as many mandates, and I would not have known that without spending the eight hours.</p>
 
-    <p>F6 fires if five or more of eight comparisons flip. Four did. It did not fire, by one — and one of the four flips for a structural reason that has nothing to do with sensitivity, which I've written up rather than argued away, because the tempting move here is to adjust the denominator now that I can see the count.</p>
+    <p>F6 fires if five or more of eight comparisons flip. That time, four did. It did not fire, by one — and one of the four flips for a structural reason that has nothing to do with sensitivity, which I've written up rather than argued away, because the tempting move here is to adjust the denominator now that I can see the count.</p>
 
-    <p>There's a second thing I'd been deferring. The protocol seals sixty percent of the population and allows exactly one look at it; I spent that look in August, on a version of the agent three revisions old. So the honest position was that my numbers had never been checked against anything unseen. Last week I registered a fresh set of a thousand universes, with the tolerances written down first, and ran them once. Every conclusion replicated: my rate moved a fifth of a point, the eighteen-point gap moved a tenth, and every difference that excluded zero excluded it again on the same side — including the flagship claim, at a quarter of a point, on worlds the agent had never seen.</p>
+<p>It fired the next day. I closed the last open attack in the suite &mdash; a customer who pays through a channel my agent can't see, which it went on chasing for money the merchant already had &mdash; and that changed what the agent does, so every one of those 185,400 runs described an agent that no longer existed. I ran the grid again, all eight hours of it. This time five comparisons flipped.</p>
+
+<p>Before the first run I had written down what that case means: <em>the evaluation does not support conclusions and is presented as an instrument-building exercise instead.</em> So that is what the repository now says, at the top, above the numbers. It fires under the older version of the rule as well &mdash; the one that set aside the arm that can never pass &mdash; four of seven, against a threshold of four. No choice of denominator rescues it, and I didn't go looking for one. I did recompute the configuration that tipped it, from nothing, to make sure it wasn't a stale file. Byte for byte, the same.</p>
+
+<p>The pattern matters more than the verdict. The incumbent's lead and the price of the guards survived every move of every guess, again. The taxonomy, the salary-aware timing and the flagship claim each failed somewhere. If I had been tuning toward a good story, that is the one pattern the tuning would not have left behind.</p>
+
+<p class="pull">The findings that are bad news for me survived everything. The ones that argue for my design did not.</p>
+
+<p>And the retry-only number, the one I told you to hold on to, turned over. Closing that attack cost me <span class="fig">3.6 points</span> of recovery, and the baseline that retries everything now leads me by <span class="fig">2.7</span>. That reads like a loss until you look at what the 3.6 points were: of 1,240 recoveries I checked with the fix switched off, 91 were money the customer had already paid some other way. The agent now stops and hands those to a person instead of collecting twice. The strawman has no way to notice, so its number didn't move.</p>
+
+    <p>There's a second thing I'd been deferring. The protocol seals sixty percent of the population and allows exactly one look at it; I spent that look in August, on a version of the agent three revisions old. So the honest position was that my numbers had never been checked against anything unseen. Last week I registered a fresh set of a thousand universes, with the tolerances written down first, and ran them once. Every conclusion replicated: my rate moved a fifth of a point, the gap, eighteen points at the time, moved a tenth, and every difference that excluded zero excluded it again on the same side — including the flagship claim, at a quarter of a point, on worlds the agent had never seen. Then, the next day, I changed the agent &mdash; the fix above &mdash; so that holdout now confirms a version one revision old, and it cannot be run again. A holdout is spent per agent, which means the next one belongs at the end, when the agent stops changing.</p>
 
     <p>Here is where all of that stopped being theoretical.</p>
 
@@ -385,13 +395,13 @@
 
     <p>I don't think that gap is mine alone. Safety tests get written as <em>this must not happen</em>, and a system that does nothing passes every one of them, perfectly, forever. A guard that defers indefinitely is indistinguishable from a guard that works. Liveness needs its own assertions, and they feel redundant right up until they aren't.</p>
 
-    <p>About those eighteen points: I sat on them for a day. Not deciding whether to publish — I'd written down in advance that I would, which is the only thing writing it down is for. I was deciding how to phrase it so it stung less. Every draft had a softener in it. <em>While the baseline scores higher on raw recovery…</em> <em>The comparison is arguably unfair, since…</em> Both true. Both also the sound of someone negotiating with a number.</p>
+    <p>About those points: I sat on them for a day. Not deciding whether to publish — I'd written down in advance that I would, which is the only thing writing it down is for. I was deciding how to phrase it so it stung less. Every draft had a softener in it. <em>While the baseline scores higher on raw recovery…</em> <em>The comparison is arguably unfair, since…</em> Both true. Both also the sound of someone negotiating with a number.</p>
 
     <p>The version I shipped states it flat, in the second paragraph, before I've earned any goodwill from the reader. It's the worse-reading version. It's the only one I'd defend.</p>
 
-    <p>I run twenty-three adversarial attacks against this thing. Twenty-two survive. One is open, named in the repo, with the conditions under which it wins.</p>
+    <p>I run twenty-four adversarial attacks against this thing. Twenty-three survive. One is open, named in the repo, with the conditions under which it wins: the payment-channel attack from earlier, against a deployment that hasn't wired the lookup that closes it.</p>
 
-    <p>The claim was never that the agent is correct. It's that <strong>being wrong is discoverable</strong> — and the evidence for that isn't the twenty-two. It's how much of that list the apparatus found instead of me.</p>
+    <p>The claim was never that the agent is correct. It's that <strong>being wrong is discoverable</strong> — and the evidence for that isn't the twenty-three. It's how much of that list the apparatus found instead of me.</p>
 
     <p>So write down what would make you abandon the thing you're building, before you build it, with a number attached. You probably won't fail the way you predicted. I didn't: I specified the wrong failure, and the one that actually mattered got caught by a test I'd written for something else. That is still the apparatus working. What never works is deciding afterwards.</p>
 
